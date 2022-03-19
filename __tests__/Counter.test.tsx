@@ -1,6 +1,6 @@
 import { fireEvent, render } from '@testing-library/react'
 import React from 'react'
-import Counter from './Counter'
+import Counter from '../src/pages/Counter'
 
 describe('<Counter/>', ()=>{
     it('matches snapshot', ()=>{
