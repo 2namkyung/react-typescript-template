@@ -2,6 +2,7 @@ const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CopyPlugin = require('copy-webpack-plugin')
 const NodePolyfillplugin = require('node-polyfill-webpack-plugin')
+const RefreshWebpackPlugin = require("@pmmmwh/react-refresh-webpack-plugin");
 
 module.exports = {
 	entry: path.join(__dirname, 'src'),
@@ -21,8 +22,12 @@ module.exports = {
             {
                 test:/\.(ts|tsx)$/,
                 exclude:/node_modules/,
-                loader: 'babel-loader'
+                loader: 'babel-loader',
+                options:{
+                    plugins:["react-refresh/babel"]
+                }
             },
+
             {
                 test:/\.s?css$/,
                 use:[
@@ -44,7 +49,9 @@ module.exports = {
             patterns:[{from:'./public/static'}]
         }),
 
-        new NodePolyfillplugin()
+        new NodePolyfillplugin(),
+        
+        new RefreshWebpackPlugin()
     ],
 
     devServer:{
