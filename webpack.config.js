@@ -1,61 +1,61 @@
-const path = require('path')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
-const CopyPlugin = require('copy-webpack-plugin')
-const NodePolyfillplugin = require('node-polyfill-webpack-plugin')
-const RefreshWebpackPlugin = require("@pmmmwh/react-refresh-webpack-plugin");
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
+const NodePolyfillplugin = require('node-polyfill-webpack-plugin');
+const RefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 
 module.exports = {
-	entry: path.join(__dirname, 'src'),
-    resolve:{
-        extensions:['.ts', '.tsx', '.js', '.jsx']
+    entry: path.join(__dirname, 'src'),
+    resolve: {
+        extensions: ['.ts', '.tsx', '.js', '.jsx'],
     },
 
-    output:{
+    output: {
         path: path.join(__dirname, 'dist'),
-        publicPath:'/',
+        publicPath: '/',
         filename: 'index_bundle.js',
-        clean: true
+        clean: true,
     },
 
-    module:{
-        rules:[
+    module: {
+        rules: [
             {
-                test:/\.(ts|tsx)$/,
-                exclude:/node_modules/,
+                test: /\.(ts|tsx)$/,
+                exclude: /node_modules/,
                 loader: 'babel-loader',
-                options:{
-                    plugins:["react-refresh/babel"]
-                }
+                options: {
+                    plugins: ['react-refresh/babel'],
+                },
             },
 
             {
-                test:/\.s?css$/,
-                use:[
+                test: /\.s?css$/,
+                use: [
                     'style-loader',
                     'css-loader',
                     'postcss-loader',
-                    'sass-loader'
-                ]
-            }
-        ]
+                    'sass-loader',
+                ],
+            },
+        ],
     },
 
-    plugins:[
+    plugins: [
         new HtmlWebpackPlugin({
-            template: './public/index.html'
+            template: './public/index.html',
         }),
 
         new CopyPlugin({
-            patterns:[{from:'./public/static'}]
+            patterns: [{ from: './public/static' }],
         }),
 
         new NodePolyfillplugin(),
-        
-        new RefreshWebpackPlugin()
+
+        new RefreshWebpackPlugin(),
     ],
 
-    devServer:{
+    devServer: {
         historyApiFallback: true,
-        static: {directory: path.resolve(__dirname, 'dist')}
-    }
+        static: { directory: path.resolve(__dirname, 'dist') },
+    },
 };

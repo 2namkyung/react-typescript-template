@@ -1,15 +1,15 @@
-import React, { useCallback, useState } from 'react'
+import React, { useCallback, useState } from 'react';
 
 const Counter: React.FC = () => {
-    const [number, setNumber] = useState<number>(0)
+    const [number, setNumber] = useState<number>(0);
 
     const onIncrease = useCallback(() => {
-        setNumber(number + 1)
-    }, [number])
+        setNumber(number + 1);
+    }, [number]);
 
     const onDecrease = useCallback(() => {
-        setNumber(number - 1)
-    }, [number])
+        setNumber(number - 1);
+    }, [number]);
 
     return (
         <div>
@@ -17,7 +17,7 @@ const Counter: React.FC = () => {
             <button onClick={onIncrease}>+1</button>
             <button onClick={onDecrease}>-1</button>
         </div>
-    )
-}
+    );
+};
 
-export default Counter
+export default Counter;
